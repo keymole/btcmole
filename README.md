@@ -279,6 +279,17 @@ If you do not follow the Telegram channel or the user group, running
 `upgrade` from time to time is a simple way to stay on a recent
 version.
 
+## Contacts
+
+- **Telegram channel** (announcements, releases, news):
+  [https://t.me/BtcMole](https://t.me/BtcMole)
+- **Telegram user group** (questions, setup help, sharing experience):
+  [https://t.me/+AIPjS1v-u3FlZjZi](https://t.me/+AIPjS1v-u3FlZjZi)
+- **Support** (registration, sessions, payouts, anything that does
+  not work as expected):
+  [@BtcMoleSup](https://t.me/BtcMoleSup)
+- **Author**: [@keymole](https://t.me/keymole)
+
 ## License
 
 See [LICENSE](LICENSE).
