@@ -75,6 +75,8 @@ Substitute your actual release number for `072` (see
 Real key-search throughput, measured by running the program on actual
 Bitcoin Puzzle targets — not synthetic benchmarks.
 
+### GPUs
+
 | Device                   | Architecture        | SM / CU |   Speed (keys/s) |
 |--------------------------|---------------------|---------|------------------|
 | NVIDIA GeForce RTX 5090  | Blackwell (SM_120)  | 170 SM  |    9 523 Mkey/s  |
@@ -85,9 +87,24 @@ Bitcoin Puzzle targets — not synthetic benchmarks.
 | AMD Radeon R9 Fury       | GCN3                |  56 CU  |      224 Mkey/s  |
 | AMD Radeon 660M iGPU     | RDNA2               |   6 CU  |       74 Mkey/s  |
 
+### CPUs (x86-64)
+
+| Device                          | Architecture          | Threads |   Speed (keys/s) |
+|---------------------------------|-----------------------|---------|------------------|
+| AMD EPYC 7C13 (64-core)         | Zen 3                 | 128     |      365 Mkey/s  |
+| Intel Core i9-14900KF           | Raptor Lake (Hybrid)  |  32     |      179 Mkey/s  |
+| AMD Ryzen 5 5500                | Zen 3                 |  12     |       58 Mkey/s  |
+| AMD Ryzen 5 7535HS              | Zen 3+                |  12     |       37 Mkey/s  |
+
+### CPUs (arm64)
+
+| Device                          | Architecture          | Threads |   Speed (keys/s) |
+|---------------------------------|-----------------------|---------|------------------|
+| Samsung Galaxy Note 9 (SD 845)  | ARMv8 (Kryo 385)      |   8     |        8 Mkey/s  |
+
 All figures are sustained long-run throughput.
 
-More user-contributed numbers for individual cards are collected in
+More user-contributed numbers for individual devices are collected in
 the Telegram user group — see the link below.
 
 ## Device selection tips
