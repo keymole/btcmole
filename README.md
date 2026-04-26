@@ -86,6 +86,21 @@ All figures are sustained long-run throughput.
 More user-contributed numbers for individual cards are collected in
 the Telegram user group — see the link below.
 
+## Device selection tips
+
+- **Ryzen APU integrated GPUs** (Vega-class and RDNA2-class iGPUs
+  baked into modern Ryzen processors) are detected as regular AMD
+  cards and work fine. There is no point in running `+cpu` together
+  with the iGPU on the same chip — they share one power budget, so
+  the CPU side will only steal watts and add little to the total
+  speed. Use `+amdgpu -cpu`.
+- **If you have a discrete NVIDIA card**, you usually do not need
+  the CPU at all. A modern CUDA GPU is dramatically more
+  energy-efficient than any CPU on this workload — adding `+cpu`
+  alongside `+cuda` typically buys a single-digit-percent speedup
+  while consuming a lot of extra wall power. `+cuda -cpu` is almost
+  always the right default.
+
 ## Which build to download
 
 Pre-built archives live in three OS folders at the root of this
