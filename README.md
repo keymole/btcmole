@@ -63,7 +63,8 @@ Substitute your actual release number for `072` (see
   running the program independently are unlikely to retread the same
   key ranges.
 - Two modes — fully offline `bf` (bruteforce on your own hardware)
-  and online `dig` (pool mode, server-distributed work).
+  and online `dig` (distributed cooperative search coordinated by
+  the pool).
 - Built-in self-update via `bmXXX upgrade`.
 - Ready-to-run binaries for Linux x86-64, Windows x86-64, Linux arm /
   arm64, macOS arm64, and Android through Termux. No build toolchain,
@@ -74,12 +75,15 @@ Substitute your actual release number for `072` (see
 Real key-search throughput, measured by running the program on actual
 Bitcoin Puzzle targets — not synthetic benchmarks.
 
-| Device                   | Architecture        |   Speed (keys/s) |
-|--------------------------|---------------------|------------------|
-| NVIDIA GeForce RTX 5090  | Blackwell (SM_120)  |    9 523 Mkey/s  |
-| NVIDIA GeForce RTX 5080  | Blackwell (SM_120)  |    4 551 Mkey/s  |
-| NVIDIA CMP 90HX          | Ampere (SM_86)      |    1 912 Mkey/s  |
-| AMD Radeon R9 Fury      | GCN3                      |      224 Mkey/s  |
+| Device                   | Architecture        | SM / CU |   Speed (keys/s) |
+|--------------------------|---------------------|---------|------------------|
+| NVIDIA GeForce RTX 5090  | Blackwell (SM_120)  | 170 SM  |    9 523 Mkey/s  |
+| NVIDIA GeForce RTX 4090  | Ada Lovelace (SM_89)|  128 SM |    6 872 Mkey/s  |
+| NVIDIA GeForce RTX 5080  | Blackwell (SM_120)  |  84 SM  |    4 551 Mkey/s  |
+| NVIDIA CMP 90HX          | Ampere (SM_86)      |  50 SM  |    1 912 Mkey/s  |
+| AMD Radeon RX 580 2048SP | GCN4                |  32 CU  |      243 Mkey/s  |
+| AMD Radeon R9 Fury       | GCN3                |  56 CU  |      224 Mkey/s  |
+| AMD Radeon 660M iGPU     | RDNA2               |   6 CU  |       74 Mkey/s  |
 
 All figures are sustained long-run throughput.
 
