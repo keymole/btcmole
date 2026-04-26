@@ -1,0 +1,17 @@
+BtcMole License
+===============
+
+You are free to use this program at no cost to search for any of your
+own forgotten Bitcoin wallets — that is, wallets for which you already
+know your own P2PKH address and an approximate key range.
+
+Exception: the Bitcoin Puzzles numbered 71 through 160.
+
+If you use BtcMole to solve any of the puzzles in the range #71..#160,
+you MUST pay the program's author 20% (twenty percent) of the value of
+the solved puzzle. Payment is arranged with the author directly via
+Telegram: @keymole.
+
+No warranty of any kind is provided. The program is supplied "as is";
+the author is not liable for any losses or damages arising from its
+use.
