@@ -26,8 +26,8 @@ bm072 bf -pz 71 +cpu +cuda +amdgpu
 # 2. Recover a forgotten wallet — known address, known approximate range.
 bm072 bf --address 1XYZ... --range 100000:1FFFFF +cpu +cuda
 
-# 3. Launch the @BtcMoleBot mini-app, obtain a session number,
-#    then join the public pool with the server distributing work:
+# 3. Dig in the public pool and earn pool-time.
+#    (Launch the @BtcMoleBot mini-app to obtain a session number.)
 bm072 dig -s <session>
 
 # 4. Full throttle — use 100% of CPU threads and every GPU compute
@@ -43,16 +43,16 @@ Substitute your actual release number for `072` (see
 ## Features
 
 - Highly optimised secp256k1 modular arithmetic for CPU (amd64, arm64, arm) and GPU (NVIDIA, AMD).
-- Full GPU stack out of the box. NVIDIA cards via CUDA
-  (compute capability 5.0 and up). AMD cards on **Linux** —
-  every architecture from **GCN 3-4** (R9 Fury and the Polaris
-  RX 400 / RX 500 series) through **GCN5 / Vega**, **CDNA 1-3**,
-  and **RDNA 1-4** is supported. AMD cards on **Windows** —
-  **RDNA2** (RX 6000 series) through **RDNA4** (RX 9000 series)
-  under AMD's current HIP SDK; **Radeon VII / Vega 20** has worked
-  under some older HIP SDK versions — your mileage may vary. A
-  single command can drive cards from both vendors and the CPU at
-  the same time.
+- Full GPU stack out of the box. A single command can drive cards
+  from both vendors and the CPU at the same time.
+    - **NVIDIA** via CUDA — compute capability 5.0 and up.
+    - **AMD on Linux** — every architecture from **GCN 3-4** (R9
+      Fury and the Polaris RX 400 / RX 500 series) through
+      **GCN5 / Vega**, **CDNA 1-3**, and **RDNA 1-4** is supported.
+    - **AMD on Windows** — **RDNA2** (RX 6000 series) through
+      **RDNA4** (RX 9000 series) under AMD's current HIP SDK.
+      **Radeon VII / Vega 20** has worked under some older HIP SDK
+      versions — your mileage may vary.
 - Per-class and per-card tuning: `+cuda:N`, `+amdgpu:50%`,
   per-card lists, reserving compute units for the desktop GPU,
   capping CPU thread counts.
