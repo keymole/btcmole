@@ -21,23 +21,24 @@ archives.
 
 ```
 # 1. Solve Bitcoin Puzzle #71 using every available CPU and GPU.
-bm072 bf -pz 71 +cpu +cuda +amdgpu
+bm073 bf -pz 71 +cpu +cuda +amdgpu
 
 # 2. Recover a forgotten wallet — known address, known approximate range.
-bm072 bf --address 1XYZ... --range 100000:1FFFFF +cpu +cuda
+bm073 bf --address 1XYZ... --range 100000:1FFFFF +cpu +cuda
 
 # 3. Dig in the public pool and earn pool-time.
 #    (Launch the @BtcMoleBot mini-app to obtain a session number.)
-bm072 dig -s <session>
+bm073 dig -s <session>
 
-# 4. Full throttle — use 100% of CPU threads and every GPU compute
-#    unit. By default the program leaves a small reserve so the
-#    machine stays usable for other tasks during the search.
-bm072 dig -s <session> +cpu:100% +cuda:100% +amdgpu:100%
+# 4. Reserve a small slice of an AMD GPU that also drives a monitor.
+#    Cutting the GPU load by 5–20% on a card that runs your desktop
+#    can speed digging up overall (less GPU↔compositor contention)
+#    and keeps the UI responsive.
+bm073 dig -s <session> -cpu -cuda +amdgpu:90%
 ```
 
-On Linux / macOS prepend `./` to the binary name (`./bm072 ...`).
-Substitute your actual release number for `072` (see
+On Linux / macOS prepend `./` to the binary name (`./bm073 ...`).
+Substitute your actual release number for `073` (see
 [A note on the executable name](#a-note-on-the-executable-name)).
 
 ## Features
@@ -91,16 +92,18 @@ Bitcoin Puzzle targets — not synthetic benchmarks.
 
 | Device                          | Architecture          | Threads |   Speed (keys/s) |
 |---------------------------------|-----------------------|---------|------------------|
-| AMD EPYC 7C13 (64-core)         | Zen 3                 | 128     |      365 Mkey/s  |
+| AMD EPYC 7713 (64-core)         | Zen 3                 | 128     |      365 Mkey/s  |
 | Intel Core i9-14900KF           | Raptor Lake (Hybrid)  |  32     |      179 Mkey/s  |
 | AMD Ryzen 5 5500                | Zen 3                 |  12     |       58 Mkey/s  |
 | AMD Ryzen 5 7535HS              | Zen 3+                |  12     |       37 Mkey/s  |
 
 ### CPUs (arm64)
 
-| Device                          | Architecture          | Threads |   Speed (keys/s) |
-|---------------------------------|-----------------------|---------|------------------|
-| Samsung Galaxy Note 9 (SD 845)  | ARMv8 (Kryo 385)      |   8     |        8 Mkey/s  |
+| Device                              | Architecture           | Threads |   Speed (keys/s) |
+|-------------------------------------|------------------------|---------|------------------|
+| Xiaomi 11 Lite (Snapdragon 780G)    | ARMv8.2 (Cortex-A78)   |   8     |    11.42 Mkey/s  |
+| OnePlus 8 Pro (Snapdragon 865)      | ARMv8.2 (Cortex-A77)   |   8     |    10.56 Mkey/s  |
+| Samsung Galaxy Note 9 (Exynos 9810) | ARMv8.2 (Mongoose M3)  |   8     |     8.12 Mkey/s  |
 
 All figures are sustained long-run throughput.
 
@@ -143,23 +146,23 @@ binary:
 | `_gpu`          | yes    | yes | Mixed NVIDIA + AMD machine (or you don't know in advance). |
 
 Example: on a Linux box with an NVIDIA RTX card take
-[`linux/bm072.linux_amd64_cuda.zip`](linux/bm072.linux_amd64_cuda.zip);
+[`linux/bm073.linux_amd64_cuda.zip`](linux/bm073.linux_amd64_cuda.zip);
 on a Linux box with an AMD card take
-[`linux/bm072.linux_amd64_amdgpu.zip`](linux/bm072.linux_amd64_amdgpu.zip);
+[`linux/bm073.linux_amd64_amdgpu.zip`](linux/bm073.linux_amd64_amdgpu.zip);
 on a Linux box with both — take
-[`linux/bm072.linux_amd64_gpu.zip`](linux/bm072.linux_amd64_gpu.zip).
+[`linux/bm073.linux_amd64_gpu.zip`](linux/bm073.linux_amd64_gpu.zip).
 
 The CPU-only build
-([`linux/bm072.linux_amd64.zip`](linux/bm072.linux_amd64.zip) /
-[`windows/bm072.windows_amd64.zip`](windows/bm072.windows_amd64.zip))
+([`linux/bm073.linux_amd64.zip`](linux/bm073.linux_amd64.zip) /
+[`windows/bm073.windows_amd64.zip`](windows/bm073.windows_amd64.zip))
 is the smallest and has no GPU runtime requirements at all — useful on
 servers / VPS with no GPU. The GPU builds also work fine without a
 GPU (they just fall back to CPU), but they are larger because they
 embed precompiled GPU kernels.
 
-For non-amd64 platforms ([Linux arm](linux/bm072.linux_arm.zip),
-[Linux arm64](linux/bm072.linux_arm64.zip),
-[macOS arm64](macos/bm072.darwin_arm64.zip)) only the CPU build is
+For non-amd64 platforms ([Linux arm](linux/bm073.linux_arm.zip),
+[Linux arm64](linux/bm073.linux_arm64.zip),
+[macOS arm64](macos/bm073.darwin_arm64.zip)) only the CPU build is
 published — there is no `_cuda` / `_amdgpu` / `_gpu` variant for
 those.
 
@@ -168,21 +171,21 @@ those.
 Every release of the program ships with the version number baked into
 the executable file name: `bmXXX`, where `XXX` is the three-digit
 version. For example, the current release
-[`linux/bm072.linux_amd64.zip`](linux/bm072.linux_amd64.zip) unpacks
-to an executable called `bm072`. The next release will be
-named `bm073`, then `bm074`, and so on.
+[`linux/bm073.linux_amd64.zip`](linux/bm073.linux_amd64.zip) unpacks
+to an executable called `bm073`. The next release will be
+named `bm074`, then `bm075`, and so on.
 
 In the command examples below the program is therefore invoked as
 `bmXXX` — substitute the actual version of the binary you have
-downloaded. For instance, if you are using release 072 the commands
-look like `bm072 bf ...` and `bm072 dig ...`.
+downloaded. For instance, if you are using release 073 the commands
+look like `bm073 bf ...` and `bm073 dig ...`.
 
 The exact form of the command also depends on your operating system:
 
 - On **Linux** and **macOS** the executable in the current directory
-  is invoked with a leading `./`, e.g. `./bm072 bf -pz 71`.
+  is invoked with a leading `./`, e.g. `./bm073 bf -pz 71`.
 - On **Windows** the leading `./` is not used; the command is simply
-  `bm072 bf -pz 71` (or `bm072.exe bf -pz 71`).
+  `bm073 bf -pz 71` (or `bm073.exe bf -pz 71`).
 
 The examples in the rest of this document are written without `./`
 for brevity; add it on Linux/macOS.
@@ -273,7 +276,7 @@ the program once against a small Bitcoin puzzle whose answer is
 already public. For example:
 
 ```
-bm072 bf -pz 30
+bm073 bf -pz 30
 ```
 
 This finishes in seconds on any modern hardware. The console will
@@ -306,7 +309,7 @@ A few things to keep in mind:
   old `bmXXX` file is **not** deleted; you can remove it manually
   once you are sure the new version works.
 - After the upgrade, run the program using the new file name (e.g.
-  `./bm073 dig -s ...` instead of `./bm072 dig -s ...`).
+  `./bm074 dig -s ...` instead of `./bm073 dig -s ...`).
 - Map and state files (`bf_*.map`, `bf_*.{cpu,cuda_N,amdgpu_N}.state`)
   are kept and are picked up by the new version, so your bruteforce
   progress is preserved.
