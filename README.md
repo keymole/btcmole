@@ -20,7 +20,8 @@ archives.
 ## Quick start
 
 ```
-# 1. Solve Bitcoin Puzzle #71 using every available CPU and GPU.
+# 1. Full throttle! Unleash every GPU you have on Bitcoin Puzzle #71
+#    — and let the CPU join in too.
 bm073 bf -pz 71 +cpu +cuda +amdgpu
 
 # 2. Recover a forgotten wallet — known address, known approximate range.
@@ -50,10 +51,14 @@ Substitute your actual release number for `073` (see
     - **AMD on Linux** — every architecture from **GCN 3-4** (R9
       Fury and the Polaris RX 400 / RX 500 series) through
       **GCN5 / Vega**, **CDNA 1-3**, and **RDNA 1-4** is supported.
-    - **AMD on Windows** — **RDNA2** (RX 6000 series) through
-      **RDNA4** (RX 9000 series) under AMD's current HIP SDK.
-      **Radeon VII / Vega 20** has worked under some older HIP SDK
-      versions — your mileage may vary.
+    - **AMD on Windows** — every architecture covered by the current
+      Adrenalin driver branch: **GCN 4 / Polaris** (RX 470 / 480 /
+      570 / 580 / 580 2048SP / 590), **GCN5 / Vega**, and **RDNA
+      1-4** (RX 5000 / 6000 / 7000 / 9000 series). Cards in the
+      legacy Adrenalin branch (R9 Fury / Nano / Tonga / HD 7000
+      series) do **not** work on Windows. **Radeon VII / Vega 20** —
+      no user reports received yet, presumably works but status on
+      Windows unconfirmed.
 - Per-class and per-card tuning: `+cuda:N`, `+amdgpu:50%`,
   per-card lists, reserving compute units for the desktop GPU,
   capping CPU thread counts.
@@ -101,8 +106,8 @@ Bitcoin Puzzle targets — not synthetic benchmarks.
 
 | Device                              | Architecture           | Threads |   Speed (keys/s) |
 |-------------------------------------|------------------------|---------|------------------|
-| Xiaomi 11 Lite (Snapdragon 780G)    | ARMv8.2 (Cortex-A78)   |   8     |    11.42 Mkey/s  |
-| OnePlus 8 Pro (Snapdragon 865)      | ARMv8.2 (Cortex-A77)   |   8     |    10.56 Mkey/s  |
+| Xiaomi 11 Lite (Snapdragon 780G)    | ARMv8.2 (Cortex-A78)   |   8     |    14.00 Mkey/s  |
+| OnePlus 8 Pro (Snapdragon 865)      | ARMv8.2 (Cortex-A77)   |   8     |    12.63 Mkey/s  |
 | Samsung Galaxy Note 9 (Exynos 9810) | ARMv8.2 (Mongoose M3)  |   8     |     8.12 Mkey/s  |
 
 All figures are sustained long-run throughput.
