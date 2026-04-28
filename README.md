@@ -89,6 +89,7 @@ Bitcoin Puzzle targets — not synthetic benchmarks.
 | NVIDIA GeForce RTX 4090  | Ada Lovelace (SM_89)|  128 SM |    6 872 Mkey/s  |
 | NVIDIA GeForce RTX 5080  | Blackwell (SM_120)  |  84 SM  |    4 551 Mkey/s  |
 | NVIDIA CMP 90HX          | Ampere (SM_86)      |  50 SM  |    1 912 Mkey/s  |
+| AMD Instinct MI300X      | CDNA3               | 304 CU  |  2 744.6 Mkey/s  |
 | AMD Radeon RX 580 2048SP | GCN4                |  32 CU  |      243 Mkey/s  |
 | AMD Radeon R9 Fury       | GCN3                |  56 CU  |      224 Mkey/s  |
 | AMD Radeon 660M iGPU     | RDNA2               |   6 CU  |       74 Mkey/s  |
@@ -97,7 +98,8 @@ Bitcoin Puzzle targets — not synthetic benchmarks.
 
 | Device                          | Architecture          | Threads |   Speed (keys/s) |
 |---------------------------------|-----------------------|---------|------------------|
-| AMD EPYC 7713 (64-core)         | Zen 3                 | 128     |      365 Mkey/s  |
+| XEON PLATINUM 8568Y+  |   Emerald Rapids  |  96          | 619 Mkey/s |
+| AMD EPYC 7713          | Zen 3                 | 128     |      365 Mkey/s  |
 | Intel Core i9-14900KF           | Raptor Lake (Hybrid)  |  32     |      179 Mkey/s  |
 | AMD Ryzen 5 5500                | Zen 3                 |  12     |       58 Mkey/s  |
 | AMD Ryzen 5 7535HS              | Zen 3+                |  12     |       37 Mkey/s  |
