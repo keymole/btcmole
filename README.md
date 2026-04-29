@@ -22,24 +22,24 @@ archives.
 ```
 # 1. Full throttle! Unleash every GPU you have on Bitcoin Puzzle #71
 #    — and let the CPU join in too.
-bm074 bf -pz 71 +cpu +cuda +amdgpu
+bm075 bf -pz 71 +cpu +cuda +amdgpu
 
 # 2. Recover a forgotten wallet — known address, known approximate range.
-bm074 bf --address 1XYZ... --range 100000:1FFFFF +cpu +cuda
+bm075 bf --address 1XYZ... --range 100000:1FFFFF +cpu +cuda
 
 # 3. Dig in the public pool and earn pool-time.
 #    (Launch the @BtcMoleBot mini-app to obtain a session number.)
-bm074 dig -s <session>
+bm075 dig -s <session>
 
 # 4. Reserve a small slice of an AMD GPU that also drives a monitor.
 #    Cutting the GPU load by 5–20% on a card that runs your desktop
 #    can speed digging up overall (less GPU↔compositor contention)
 #    and keeps the UI responsive.
-bm074 dig -s <session> -cpu -cuda +amdgpu:90%
+bm075 dig -s <session> -cpu -cuda +amdgpu:90%
 ```
 
-On Linux / macOS prepend `./` to the binary name (`./bm074 ...`).
-Substitute your actual release number for `074` (see
+On Linux / macOS prepend `./` to the binary name (`./bm075 ...`).
+Substitute your actual release number for `075` (see
 [A note on the executable name](#a-note-on-the-executable-name)).
 
 ## Features
@@ -153,23 +153,23 @@ binary:
 | `_gpu`          | yes    | yes | Mixed NVIDIA + AMD machine (or you don't know in advance). |
 
 Example: on a Linux box with an NVIDIA RTX card take
-[`linux/bm074.linux_amd64_cuda.zip`](linux/bm074.linux_amd64_cuda.zip);
+[`linux/bm075.linux_amd64_cuda.zip`](linux/bm075.linux_amd64_cuda.zip);
 on a Linux box with an AMD card take
-[`linux/bm074.linux_amd64_amdgpu.zip`](linux/bm074.linux_amd64_amdgpu.zip);
+[`linux/bm075.linux_amd64_amdgpu.zip`](linux/bm075.linux_amd64_amdgpu.zip);
 on a Linux box with both — take
-[`linux/bm074.linux_amd64_gpu.zip`](linux/bm074.linux_amd64_gpu.zip).
+[`linux/bm075.linux_amd64_gpu.zip`](linux/bm075.linux_amd64_gpu.zip).
 
 The CPU-only build
-([`linux/bm074.linux_amd64.zip`](linux/bm074.linux_amd64.zip) /
-[`windows/bm074.windows_amd64.zip`](windows/bm074.windows_amd64.zip))
+([`linux/bm075.linux_amd64.zip`](linux/bm075.linux_amd64.zip) /
+[`windows/bm075.windows_amd64.zip`](windows/bm075.windows_amd64.zip))
 is the smallest and has no GPU runtime requirements at all — useful on
 servers / VPS with no GPU. The GPU builds also work fine without a
 GPU (they just fall back to CPU), but they are larger because they
 embed precompiled GPU kernels.
 
-For non-amd64 platforms ([Linux arm](linux/bm074.linux_arm.zip),
-[Linux arm64](linux/bm074.linux_arm64.zip),
-[macOS arm64](macos/bm074.darwin_arm64.zip)) only the CPU build is
+For non-amd64 platforms ([Linux arm](linux/bm075.linux_arm.zip),
+[Linux arm64](linux/bm075.linux_arm64.zip),
+[macOS arm64](macos/bm075.darwin_arm64.zip)) only the CPU build is
 published — there is no `_cuda` / `_amdgpu` / `_gpu` variant for
 those.
 
@@ -178,21 +178,21 @@ those.
 Every release of the program ships with the version number baked into
 the executable file name: `bmXXX`, where `XXX` is the three-digit
 version. For example, the current release
-[`linux/bm074.linux_amd64.zip`](linux/bm074.linux_amd64.zip) unpacks
-to an executable called `bm074`. The next release will be
-named `bm075`, then `bm076`, and so on.
+[`linux/bm075.linux_amd64.zip`](linux/bm075.linux_amd64.zip) unpacks
+to an executable called `bm075`. The next release will be
+named `bm076`, then `bm077`, and so on.
 
 In the command examples below the program is therefore invoked as
 `bmXXX` — substitute the actual version of the binary you have
-downloaded. For instance, if you are using release 074 the commands
-look like `bm074 bf ...` and `bm074 dig ...`.
+downloaded. For instance, if you are using release 075 the commands
+look like `bm075 bf ...` and `bm075 dig ...`.
 
 The exact form of the command also depends on your operating system:
 
 - On **Linux** and **macOS** the executable in the current directory
-  is invoked with a leading `./`, e.g. `./bm074 bf -pz 71`.
+  is invoked with a leading `./`, e.g. `./bm075 bf -pz 71`.
 - On **Windows** the leading `./` is not used; the command is simply
-  `bm074 bf -pz 71` (or `bm074.exe bf -pz 71`).
+  `bm075 bf -pz 71` (or `bm075.exe bf -pz 71`).
 
 The examples in the rest of this document are written without `./`
 for brevity; add it on Linux/macOS.
@@ -283,7 +283,7 @@ the program once against a small Bitcoin puzzle whose answer is
 already public. For example:
 
 ```
-bm074 bf -pz 30
+bm075 bf -pz 30
 ```
 
 This finishes in seconds on any modern hardware. The console will
@@ -316,7 +316,7 @@ A few things to keep in mind:
   old `bmXXX` file is **not** deleted; you can remove it manually
   once you are sure the new version works.
 - After the upgrade, run the program using the new file name (e.g.
-  `./bm075 dig -s ...` instead of `./bm074 dig -s ...`).
+  `./bm076 dig -s ...` instead of `./bm075 dig -s ...`).
 - Map and state files (`bf_*.map`, `bf_*.{cpu,cuda_N,amdgpu_N}.state`)
   are kept and are picked up by the new version, so your bruteforce
   progress is preserved.
