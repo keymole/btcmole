@@ -17,6 +17,13 @@ and **Android through Termux**. Pre-built binaries for every
 supported platform are published in this repository as ZIP
 archives.
 
+## Why BtcMole instead of an open-source solver?
+
+Puzzle solving is a **winner-takes-all race** — only one
+participant ever finds the key. On the same hardware, a solver
+that is roughly **30% faster** gives you dramatically better odds
+of being that one.
+
 ## Quick start
 
 ```
