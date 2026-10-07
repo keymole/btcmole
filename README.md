@@ -1,4 +1,4 @@
-# BtcMole — World's Fastest Bitcoin Puzzle Solver (as of July 2026)
+# BtcMole — World's Fastest Bitcoin Puzzle Solver (as of October 2026)
 
 To the best of the author's knowledge, BtcMole is the world's
 fastest program for solving Bitcoin puzzles given only the P2PKH
@@ -123,6 +123,17 @@ All figures are sustained long-run throughput.
 
 More user-contributed numbers for individual devices are collected in
 the Telegram user group — see the link below.
+
+### Kangaroo mode (`bmXXX kang`, puzzles with a known public key)
+
+Head-to-head with RCKangaroo v4.0 on the same card, DP 14:
+
+| GPU                        | BtcMole        | RCKangaroo v4.0 | Advantage              |
+|----------------------------|----------------|-----------------|------------------------|
+| NVIDIA RTX 5090            | ~20 100 Mkey/s | ~19 000 Mkey/s  | ~6% faster             |
+| NVIDIA RTX 4090            | ~14 700 Mkey/s | ~14 400 Mkey/s  | ~2% faster             |
+| NVIDIA RTX 5070 Ti (250 W) |  ~8 600 Mkey/s |  ~7 700 Mkey/s  | ~12% faster            |
+| NVIDIA CMP 90HX            |  ~2 900 Mkey/s |  ~1 800 Mkey/s  | keys found ~13% sooner |
 
 ## Device selection tips
 
