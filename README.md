@@ -12,9 +12,9 @@ own P2PKH address.
 GPU acceleration — NVIDIA via CUDA and AMD via ROCm / HIP — is
 available on **Linux x86-64** and **Windows x86-64**. CPU-only
 operation is supported on every platform: **Linux x86-64**,
-**Windows x86-64**, **macOS arm64**, **Linux arm**, **Linux arm64**,
-and **Android through Termux**. Pre-built binaries for every
-supported platform are published in this repository as ZIP
+**Windows x86-64**, **macOS arm64**, **macOS x86-64**, **Linux arm**,
+**Linux arm64**, and **Android through Termux**. Pre-built binaries
+for every supported platform are published in this repository as ZIP
 archives.
 
 ## Why BtcMole instead of an open-source solver?
@@ -80,8 +80,8 @@ Substitute your actual release number for `079` (see
   the pool).
 - Built-in self-update via `bmXXX upgrade`.
 - Ready-to-run binaries for Linux x86-64, Windows x86-64, Linux arm /
-  arm64, macOS arm64, and Android through Termux. No build toolchain,
-  no driver SDKs, no runtime dependencies beyond the GPU driver.
+  arm64, macOS arm64 / x86-64, and Android through Termux. No build
+  toolchain, no driver SDKs, no runtime dependencies beyond the GPU driver.
 
 ## Performance
 
@@ -157,7 +157,7 @@ repository:
 
 - [`linux/`](linux/) — Linux builds (x86-64 + arm / arm64).
 - [`windows/`](windows/) — Windows x86-64 builds.
-- [`macos/`](macos/) — macOS arm64 build.
+- [`macos/`](macos/) — macOS builds (arm64 + x86-64).
 
 For Linux x86-64 and Windows x86-64 there are four ZIPs in every
 release; they differ in which GPU back-ends are compiled into the
@@ -194,9 +194,10 @@ the driver is installed in a non-standard location, set the
 and only that path will be used, e.g.
 `BM_CUDA_LIB=/opt/cuda/lib64/libcuda.so`.
 
-For non-amd64 platforms ([Linux arm](linux/bm080.linux_arm.zip),
+For the other platforms ([Linux arm](linux/bm080.linux_arm.zip),
 [Linux arm64](linux/bm080.linux_arm64.zip),
-[macOS arm64](macos/bm080.darwin_arm64.zip)) only the CPU build is
+[macOS arm64](macos/bm080.darwin_arm64.zip),
+[macOS x86-64](macos/bm080.darwin_amd64.zip)) only the CPU build is
 published — there is no `_cuda` / `_amdgpu` / `_gpu` variant for
 those.
 
