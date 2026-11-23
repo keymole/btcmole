@@ -29,24 +29,24 @@ of being that one.
 ```
 # 1. Full throttle! Unleash every GPU you have on Bitcoin Puzzle #71
 #    — and let the CPU join in too.
-bm094 bf -pz 71 +cpu +cuda +amdgpu
+bm097 bf -pz 71 +cpu +cuda +amdgpu
 
 # 2. Recover a forgotten wallet — known address, known approximate range.
-bm094 bf --address 1XYZ... --range 100000:1FFFFF +cpu +cuda
+bm097 bf --address 1XYZ... --range 100000:1FFFFF +cpu +cuda
 
 # 3. Dig in the public pool and earn pool-time.
 #    (Launch the @BtcMoleBot mini-app to obtain a session number.)
-bm094 dig -s <session>
+bm097 dig -s <session>
 
 # 4. Reserve a small slice of an AMD GPU that also drives a monitor.
 #    Cutting the GPU load by 5–20% on a card that runs your desktop
 #    can speed digging up overall (less GPU↔compositor contention)
 #    and keeps the UI responsive.
-bm094 dig -s <session> -cpu -cuda +amdgpu:90%
+bm097 dig -s <session> -cpu -cuda +amdgpu:90%
 ```
 
-On Linux / macOS prepend `./` to the binary name (`./bm094 ...`).
-Substitute your actual release number for `081` (see
+On Linux / macOS prepend `./` to the binary name (`./bm097 ...`).
+Substitute your actual release number for `097` (see
 [A note on the executable name](#a-note-on-the-executable-name)).
 
 ## Features
@@ -58,6 +58,9 @@ Substitute your actual release number for `081` (see
     - **AMD on Linux** — every architecture from **GCN 3-4** (R9
       Fury and the Polaris RX 400 / RX 500 series) through
       **GCN5 / Vega**, **CDNA 1-3**, and **RDNA 1-4** is supported.
+      With ROCm HSA 6.4.4, the Linux build adds support for RDNA 4
+      (Radeon RX 9060 and RX 9070 families, Radeon AI PRO R9700)
+      and RDNA 3.5 graphics in select Ryzen AI 300 and Ryzen AI Max 300 APUs.
     - **AMD on Windows** — every architecture covered by the current
       Adrenalin driver branch: **GCN 4 / Polaris** (RX 470 / 480 /
       570 / 580 / 580 2048SP / 590), **GCN5 / Vega**, and **RDNA
@@ -75,9 +78,10 @@ Substitute your actual release number for `081` (see
 - Random sector selection in offline search, so that different users
   running the program independently are unlikely to retread the same
   key ranges.
-- Two modes — fully offline `bf` (bruteforce on your own hardware)
-  and online `dig` (distributed cooperative search coordinated by
-  the pool).
+- Offline `bf` runs bruteforce on your hardware. The `dig` and
+  `jump` modes join the pool. When `jump` starts, it reports how many
+  herd blocks come from your saved herd, are reassigned from other
+  users, or are generated locally.
 - Built-in self-update via `bmXXX upgrade`.
 - Ready-to-run binaries for Linux x86-64, Windows x86-64, Linux arm /
   arm64, macOS arm64 / x86-64, and Android through Termux. No build
@@ -171,15 +175,15 @@ binary:
 | `_gpu`          | yes    | yes | Mixed NVIDIA + AMD machine (or you don't know in advance). |
 
 Example: on a Linux box with an NVIDIA RTX card take
-[`linux/bm094.linux_amd64_cuda.zip`](linux/bm094.linux_amd64_cuda.zip);
+[`linux/bm097.linux_amd64_cuda.zip`](linux/bm097.linux_amd64_cuda.zip);
 on a Linux box with an AMD card take
-[`linux/bm094.linux_amd64_amdgpu.zip`](linux/bm094.linux_amd64_amdgpu.zip);
+[`linux/bm097.linux_amd64_amdgpu.zip`](linux/bm097.linux_amd64_amdgpu.zip);
 on a Linux box with both — take
-[`linux/bm094.linux_amd64_gpu.zip`](linux/bm094.linux_amd64_gpu.zip).
+[`linux/bm097.linux_amd64_gpu.zip`](linux/bm097.linux_amd64_gpu.zip).
 
 The CPU-only build
-([`linux/bm094.linux_amd64.zip`](linux/bm094.linux_amd64.zip) /
-[`windows/bm094.windows_amd64.zip`](windows/bm094.windows_amd64.zip))
+([`linux/bm097.linux_amd64.zip`](linux/bm097.linux_amd64.zip) /
+[`windows/bm097.windows_amd64.zip`](windows/bm097.windows_amd64.zip))
 is the smallest and has no GPU runtime requirements at all — useful on
 servers / VPS with no GPU. The GPU builds also work fine without a
 GPU (they just fall back to CPU), but they are larger because they
@@ -194,10 +198,10 @@ the driver is installed in a non-standard location, set the
 and only that path will be used, e.g.
 `BM_CUDA_LIB=/opt/cuda/lib64/libcuda.so`.
 
-For the other platforms ([Linux arm](linux/bm094.linux_arm.zip),
-[Linux arm64](linux/bm094.linux_arm64.zip),
-[macOS arm64](macos/bm094.darwin_arm64.zip),
-[macOS x86-64](macos/bm094.darwin_amd64.zip)) only the CPU build is
+For the other platforms ([Linux arm](linux/bm097.linux_arm.zip),
+[Linux arm64](linux/bm097.linux_arm64.zip),
+[macOS arm64](macos/bm097.darwin_arm64.zip),
+[macOS x86-64](macos/bm097.darwin_amd64.zip)) only the CPU build is
 published — there is no `_cuda` / `_amdgpu` / `_gpu` variant for
 those.
 
@@ -206,21 +210,21 @@ those.
 Every release of the program ships with the version number baked into
 the executable file name: `bmXXX`, where `XXX` is the three-digit
 version. For example, the current release
-[`linux/bm094.linux_amd64.zip`](linux/bm094.linux_amd64.zip) unpacks
-to an executable called `bm094`. The next release will be
-named `bm095`, then `bm096`, and so on.
+[`linux/bm097.linux_amd64.zip`](linux/bm097.linux_amd64.zip) unpacks
+to an executable called `bm097`. The next release will be
+named `bm098`, then `bm099`, and so on.
 
 In the command examples below the program is therefore invoked as
 `bmXXX` — substitute the actual version of the binary you have
-downloaded. For instance, if you are using release 081 the commands
-look like `bm094 bf ...` and `bm094 dig ...`.
+downloaded. For instance, if you are using release 0.9.7 the commands
+look like `bm097 bf ...` and `bm097 dig ...`.
 
 The exact form of the command also depends on your operating system:
 
 - On **Linux** and **macOS** the executable in the current directory
-  is invoked with a leading `./`, e.g. `./bm094 bf -pz 71`.
+  is invoked with a leading `./`, e.g. `./bm097 bf -pz 71`.
 - On **Windows** the leading `./` is not used; the command is simply
-  `bm094 bf -pz 71` (or `bm094.exe bf -pz 71`).
+  `bm097 bf -pz 71` (or `bm097.exe bf -pz 71`).
 
 The examples in the rest of this document are written without `./`
 for brevity; add it on Linux/macOS.
@@ -311,7 +315,7 @@ the program once against a small Bitcoin puzzle whose answer is
 already public. For example:
 
 ```
-bm094 bf -pz 30
+bm097 bf -pz 30
 ```
 
 This finishes in seconds on any modern hardware. The console will
@@ -344,7 +348,7 @@ A few things to keep in mind:
   old `bmXXX` file is **not** deleted; you can remove it manually
   once you are sure the new version works.
 - After the upgrade, run the program using the new file name (e.g.
-  `./bm095 dig -s ...` instead of `./bm094 dig -s ...`).
+  `./bm098 dig -s ...` instead of `./bm097 dig -s ...`).
 - Map and state files (`bf_*.map`, `bf_*.{cpu,cuda_N,amdgpu_N}.state`)
   are kept and are picked up by the new version, so your bruteforce
   progress is preserved.
