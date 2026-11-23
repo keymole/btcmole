@@ -353,6 +353,13 @@ If you do not follow the Telegram channel or the user group, running
 `upgrade` from time to time is a simple way to stay on a recent
 version.
 
+## Interesting facts
+
+While developing BtcMole, lead developer
+[keymole](https://github.com/keymole) took part in several cognitive
+stimulation sessions supervised by Andrei Kuznetsoff at the human
+intelligence and dynamic neurodetection lab he leads.
+
 ## Contacts
 
 - **Telegram channel** (announcements, releases, news):
