@@ -29,24 +29,24 @@ of being that one.
 ```
 # 1. Full throttle! Unleash every GPU you have on Bitcoin Puzzle #71
 #    — and let the CPU join in too.
-bm097 bf -pz 71 +cpu +cuda +amdgpu
+bm098 bf -pz 71 +cpu +cuda +amdgpu
 
 # 2. Recover a forgotten wallet — known address, known approximate range.
-bm097 bf --address 1XYZ... --range 100000:1FFFFF +cpu +cuda
+bm098 bf --address 1XYZ... --range 100000:1FFFFF +cpu +cuda
 
 # 3. Dig in the public pool and earn pool-time.
 #    (Launch the @BtcMoleBot mini-app to obtain a session number.)
-bm097 dig -s <session>
+bm098 dig -s <session>
 
 # 4. Reserve a small slice of an AMD GPU that also drives a monitor.
 #    Cutting the GPU load by 5–20% on a card that runs your desktop
 #    can speed digging up overall (less GPU↔compositor contention)
 #    and keeps the UI responsive.
-bm097 dig -s <session> -cpu -cuda +amdgpu:90%
+bm098 dig -s <session> -cpu -cuda +amdgpu:90%
 ```
 
-On Linux / macOS prepend `./` to the binary name (`./bm097 ...`).
-Substitute your actual release number for `097` (see
+On Linux / macOS prepend `./` to the binary name (`./bm098 ...`).
+Substitute your actual release number for `098` (see
 [A note on the executable name](#a-note-on-the-executable-name)).
 
 ## Features
@@ -175,15 +175,15 @@ binary:
 | `_gpu`          | yes    | yes | Mixed NVIDIA + AMD machine (or you don't know in advance). |
 
 Example: on a Linux box with an NVIDIA RTX card take
-[`linux/bm097.linux_amd64_cuda.zip`](linux/bm097.linux_amd64_cuda.zip);
+[`linux/bm098.linux_amd64_cuda.zip`](linux/bm098.linux_amd64_cuda.zip);
 on a Linux box with an AMD card take
-[`linux/bm097.linux_amd64_amdgpu.zip`](linux/bm097.linux_amd64_amdgpu.zip);
+[`linux/bm098.linux_amd64_amdgpu.zip`](linux/bm098.linux_amd64_amdgpu.zip);
 on a Linux box with both — take
-[`linux/bm097.linux_amd64_gpu.zip`](linux/bm097.linux_amd64_gpu.zip).
+[`linux/bm098.linux_amd64_gpu.zip`](linux/bm098.linux_amd64_gpu.zip).
 
 The CPU-only build
-([`linux/bm097.linux_amd64.zip`](linux/bm097.linux_amd64.zip) /
-[`windows/bm097.windows_amd64.zip`](windows/bm097.windows_amd64.zip))
+([`linux/bm098.linux_amd64.zip`](linux/bm098.linux_amd64.zip) /
+[`windows/bm098.windows_amd64.zip`](windows/bm098.windows_amd64.zip))
 is the smallest and has no GPU runtime requirements at all — useful on
 servers / VPS with no GPU. The GPU builds also work fine without a
 GPU (they just fall back to CPU), but they are larger because they
@@ -198,10 +198,10 @@ the driver is installed in a non-standard location, set the
 and only that path will be used, e.g.
 `BM_CUDA_LIB=/opt/cuda/lib64/libcuda.so`.
 
-For the other platforms ([Linux arm](linux/bm097.linux_arm.zip),
-[Linux arm64](linux/bm097.linux_arm64.zip),
-[macOS arm64](macos/bm097.darwin_arm64.zip),
-[macOS x86-64](macos/bm097.darwin_amd64.zip)) only the CPU build is
+For the other platforms ([Linux arm](linux/bm098.linux_arm.zip),
+[Linux arm64](linux/bm098.linux_arm64.zip),
+[macOS arm64](macos/bm098.darwin_arm64.zip),
+[macOS x86-64](macos/bm098.darwin_amd64.zip)) only the CPU build is
 published — there is no `_cuda` / `_amdgpu` / `_gpu` variant for
 those.
 
@@ -210,21 +210,21 @@ those.
 Every release of the program ships with the version number baked into
 the executable file name: `bmXXX`, where `XXX` is the three-digit
 version. For example, the current release
-[`linux/bm097.linux_amd64.zip`](linux/bm097.linux_amd64.zip) unpacks
-to an executable called `bm097`. The next release will be
-named `bm098`, then `bm099`, and so on.
+[`linux/bm098.linux_amd64.zip`](linux/bm098.linux_amd64.zip) unpacks
+to an executable called `bm098`. The next release will be
+named `bm099`, then `bm100`, and so on.
 
 In the command examples below the program is therefore invoked as
 `bmXXX` — substitute the actual version of the binary you have
-downloaded. For instance, if you are using release 0.9.7 the commands
-look like `bm097 bf ...` and `bm097 dig ...`.
+downloaded. For instance, if you are using release 0.9.8 the commands
+look like `bm098 bf ...` and `bm098 dig ...`.
 
 The exact form of the command also depends on your operating system:
 
 - On **Linux** and **macOS** the executable in the current directory
-  is invoked with a leading `./`, e.g. `./bm097 bf -pz 71`.
+  is invoked with a leading `./`, e.g. `./bm098 bf -pz 71`.
 - On **Windows** the leading `./` is not used; the command is simply
-  `bm097 bf -pz 71` (or `bm097.exe bf -pz 71`).
+  `bm098 bf -pz 71` (or `bm098.exe bf -pz 71`).
 
 The examples in the rest of this document are written without `./`
 for brevity; add it on Linux/macOS.
@@ -305,9 +305,10 @@ When the program locates the private key for the target address, it
 writes a result file in the current working directory and stops the
 run:
 
-- `FOUND_PUZZLE_<N>.txt` — for puzzle searches (`bf -pz N` and `dig`).
-- `FOUND_KEY_<address>.txt` — for arbitrary-target searches
-  (`bf --address ...`).
+- `FOUND_PUZZLE_<N>.txt` — for puzzle searches, including `bf -pz N`
+  and `kang -pz N`.
+- `FOUND_KEY_<address>.txt` — for custom targets specified with
+  `bf --address ...` or `kang --pubkey ...`.
 
 If you want to see in advance what a successful find looks like —
 both the console output and the contents of the result file — run
@@ -315,7 +316,7 @@ the program once against a small Bitcoin puzzle whose answer is
 already public. For example:
 
 ```
-bm097 bf -pz 30
+bm098 bf -pz 30
 ```
 
 This finishes in seconds on any modern hardware. The console will
@@ -323,9 +324,12 @@ print a `TREASURE KEY FOUND!` line, the program will stop, and a
 file named `FOUND_PUZZLE_30.txt` will appear in the current working
 directory. Open that file to see the result format end-to-end. That
 is exactly what you will get when you recover one of your own
-wallets or solve a low-difficulty puzzle. For higher puzzles you
-will see a similar but not identical file, which also includes
-instructions for contacting the author.
+wallets or solve a low-difficulty puzzle with `bf`.
+
+The encrypted puzzle result described here applies to `bf -pz N` for
+Bitcoin puzzles #71–160. It includes instructions for contacting the
+author. The `kang` command always shows and saves the private key in
+compressed WIF, decimal, and hexadecimal.
 
 ## Updating the program (`bmXXX upgrade`)
 
@@ -348,7 +352,7 @@ A few things to keep in mind:
   old `bmXXX` file is **not** deleted; you can remove it manually
   once you are sure the new version works.
 - After the upgrade, run the program using the new file name (e.g.
-  `./bm098 dig -s ...` instead of `./bm097 dig -s ...`).
+  `./bm099 dig -s ...` instead of `./bm098 dig -s ...`).
 - Map and state files (`bf_*.map`, `bf_*.{cpu,cuda_N,amdgpu_N}.state`)
   are kept and are picked up by the new version, so your bruteforce
   progress is preserved.
